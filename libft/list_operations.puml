@@ -1,0 +1,26 @@
+@startuml list_operations
+
+package "List Operations" {
+    package "Node Creation" {
+        component "ft_lstnew"
+    }
+
+    package "List Navigation" {
+        component "ft_lstadd_front"
+        component "ft_lstadd_back"
+        component "ft_lstlast"
+        component "ft_lstsize"
+    }
+
+    package "List Manipulation" {
+        component "ft_lstiter"
+        component "ft_lstmap"
+    }
+
+    package "List Deletion" {
+        component "ft_lstdelone"
+        component "ft_lstclear"
+    }
+}
+
+@enduml

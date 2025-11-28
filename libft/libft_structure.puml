@@ -1,0 +1,97 @@
+' plantuml *.puml -o
+@startuml libft_structure
+
+package "libft Library" {
+    package "Part 1: Libc Functions" {
+        package "Character Classification" {
+            component "ft_isalpha"
+            component "ft_isdigit"
+            component "ft_isalnum"
+            component "ft_isascii"
+            component "ft_isprint"
+        }
+
+        package "Character Conversion" {
+            component "ft_toupper"
+            component "ft_tolower"
+        }
+
+        package "String Functions" {
+            component "ft_strlen"
+            component "ft_strchr"
+            component "ft_strrchr"
+            component "ft_strncmp"
+            component "ft_strnstr"
+        }
+
+        package "Memory Functions" {
+            component "ft_memset"
+            component "ft_bzero"
+            component "ft_memcpy"
+            component "ft_memmove"
+            component "ft_memchr"
+            component "ft_memcmp"
+        }
+
+        package "String Manipulation" {
+            component "ft_strlcpy"
+            component "ft_strlcat"
+        }
+
+        package "Conversion" {
+            component "ft_atoi"
+        }
+
+        package "Allocation" {
+            component "ft_calloc"
+            component "ft_strdup"
+        }
+    }
+
+    package "Part 2: Additional Functions" {
+        package "String Creation" {
+            component "ft_substr"
+            component "ft_strjoin"
+            component "ft_strtrim"
+            component "ft_split"
+        }
+
+        package "String Transformation" {
+            component "ft_strmapi"
+            component "ft_striteri"
+        }
+
+        package "Integer Conversion" {
+            component "ft_itoa"
+        }
+
+        package "File Descriptor Output" {
+            component "ft_putchar_fd"
+            component "ft_putstr_fd"
+            component "ft_putendl_fd"
+            component "ft_putnbr_fd"
+        }
+    }
+
+    package "Bonus: Linked List Functions" {
+        package "Node Management" {
+            component "ft_lstnew"
+            component "ft_lstdelone"
+            component "ft_lstclear"
+        }
+
+        package "List Navigation" {
+            component "ft_lstadd_front"
+            component "ft_lstadd_back"
+            component "ft_lstlast"
+            component "ft_lstsize"
+        }
+
+        package "List Iteration" {
+            component "ft_lstiter"
+            component "ft_lstmap"
+        }
+    }
+}
+
+@enduml

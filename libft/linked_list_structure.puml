@@ -1,0 +1,17 @@
+@startuml linked_list_structure
+
+package "Linked List Structure" {
+    component "t_list Node" {
+        card "void *content"
+        card "struct s_list *next"
+    }
+
+    component "Node 1"
+    component "Node 2"
+    component "Node 3"
+
+    Node1 --> Node2
+    Node2 --> Node3
+}
+
+@enduml

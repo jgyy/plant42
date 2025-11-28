@@ -1,0 +1,30 @@
+@startuml implementation_order
+
+package "Phase 1: Character & Memory Functions" {
+    component "Character Classification"
+    component "Case Conversion"
+    component "Memory Functions"
+}
+
+package "Phase 2: String Functions" {
+    component "String Length & Search"
+    component "String Comparison"
+    component "String Copy & Concatenate"
+    component "Conversion & Allocation"
+}
+
+package "Phase 3: Advanced Functions" {
+    component "Part 2: String Manipulation"
+    component "Part 2: Conversion & I/O"
+    component "Bonus: Linked Lists"
+}
+
+"Character Classification" --> "String Length & Search"
+"Memory Functions" --> "String Length & Search"
+"String Length & Search" --> "String Copy & Concatenate"
+"String Length & Search" --> "Conversion & Allocation"
+"Conversion & Allocation" --> "Part 2: String Manipulation"
+"Conversion & Allocation" --> "Part 2: Conversion & I/O"
+"Conversion & Allocation" --> "Bonus: Linked Lists"
+
+@enduml

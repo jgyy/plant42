@@ -1,0 +1,31 @@
+@startuml function_dependencies
+
+package "Part 1: Basic Functions" {
+    component "Character Check"
+    component "String Basics"
+    component "Memory Basics"
+}
+
+package "Part 2: Advanced Functions" {
+    component "String Manipulation"
+    component "String Creation"
+    component "I/O Functions"
+}
+
+package "Bonus: List Functions" {
+    component "List Basics"
+    component "List Advanced"
+}
+
+"Character Check" --> "String Basics"
+"Memory Basics" --> "String Basics"
+"Character Check" --> "String Manipulation"
+"String Basics" --> "String Manipulation"
+"Memory Basics" --> "String Manipulation"
+"String Basics" --> "String Creation"
+"String Basics" --> "I/O Functions"
+"Memory Basics" --> "List Basics"
+"String Basics" --> "List Basics"
+"List Basics" --> "List Advanced"
+
+@enduml

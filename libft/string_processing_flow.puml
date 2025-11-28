@@ -1,0 +1,16 @@
+@startuml string_processing_flow
+
+start
+:Input: Raw String;
+:Part 1: Basic Operations
+(ft_strlen, ft_strchr, isalpha, etc);
+:Part 2: Advanced Processing
+(ft_substr, ft_strjoin, ft_split);
+:String Transformation
+(ft_strmapi, ft_striteri, ft_itoa);
+:Part 2 I/O Functions
+(ft_putchar_fd, ft_putstr_fd);
+:Write to File Descriptor;
+stop
+
+@enduml
