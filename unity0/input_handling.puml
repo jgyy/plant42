@@ -1,0 +1,82 @@
+@startuml input_handling
+
+package "Input Detection System" {
+    component "W Key"
+    component "A Key"
+    component "S Key"
+    component "D Key"
+    component "Up Arrow"
+    component "Left Arrow"
+    component "Right Arrow"
+    component "Down Arrow"
+    component "Forward Movement"
+    component "Left Movement"
+    component "Right Movement"
+    component "Backward Movement"
+    component "Calculate Movement Vector"
+
+    package "WASD Keys" {
+        W_Key --> Forward_Movement
+        A_Key --> Left_Movement
+        S_Key --> Backward_Movement
+        D_Key --> Right_Movement
+    }
+
+    package "Arrow Keys" {
+        Up_Arrow --> Forward_Movement
+        Left_Arrow --> Left_Movement
+        Down_Arrow --> Backward_Movement
+        Right_Arrow --> Right_Movement
+    }
+
+    package "Movement Processing" {
+        Forward_Movement --> Calculate_Movement_Vector
+        Left_Movement --> Calculate_Movement_Vector
+        Right_Movement --> Calculate_Movement_Vector
+        Backward_Movement --> Calculate_Movement_Vector
+    }
+
+    package "Jump Input" {
+        component "Space Bar"
+        component "Check Ground Contact"
+        component "Apply Jump Force"
+
+        note right of "Space Bar"
+            Input.GetKeyDown(KeyCode.Space)
+        end note
+
+        Space_Bar --> Check_Ground_Contact
+        Check_Ground_Contact --> Apply_Jump_Force
+    }
+
+    package "Velocity Application" {
+        component "Multiply by moveSpeed"
+        component "Maintain Y Velocity"
+        component "Set rb.velocity"
+        component "Apply Jump Force"
+
+        Calculate_Movement_Vector --> Multiply_by_moveSpeed
+        Multiply_by_moveSpeed --> Maintain_Y_Velocity
+        Maintain_Y_Velocity --> Set_rb_velocity
+
+        Apply_Jump_Force --> Set_rb_velocity
+    }
+}
+
+package "Input Code Example" {
+    card "Update() Method" as code
+    note right of code
+        Input.GetKey(KeyCode.W)
+        Input.GetKey(KeyCode.A)
+        Input.GetKey(KeyCode.S)
+        Input.GetKey(KeyCode.D)
+        Input.GetKeyDown(KeyCode.Space)
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.DownArrow))
+    end note
+}
+
+@enduml

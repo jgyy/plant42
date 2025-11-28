@@ -1,0 +1,77 @@
+@startuml player_controller
+
+package "PlayerController Script" {
+    package "Variables" {
+        component "moveSpeed: float"
+        component "jumpForce: float"
+        component "isGrounded: bool"
+        component "rb: Rigidbody"
+    }
+
+    package "Input Detection" {
+        component "Check W Key"
+        component "Check A Key"
+        component "Check S Key"
+        component "Check D Key"
+        component "Check Arrow Keys"
+        component "Check Space (Jump)"
+    }
+
+    package "Movement Logic" {
+        component "Forward Input"
+        component "Left Input"
+        component "Right Input"
+        component "Backward Input"
+        component "Calculate Velocity"
+        component "Apply Movement"
+    }
+
+    package "Jump Logic" {
+        component "Check If Grounded"
+        component "Check Jump Input"
+        component "Apply Jump Force"
+        component "Update Velocity"
+    }
+
+    package "Physics" {
+        component "Rigidbody.velocity"
+        component "Gravity"
+        component "Collision Detection"
+    }
+
+    package "Ground Detection" {
+        component "Raycast Down"
+        component "Check Collision Below"
+        component "Update isGrounded"
+    }
+}
+
+"Check W Key" --> "Forward Input"
+"Check A Key" --> "Left Input"
+"Check S Key" --> "Backward Input"
+"Check D Key" --> "Right Input"
+"Check Arrow Keys" --> "Forward Input"
+"Check Arrow Keys" --> "Left Input"
+"Check Arrow Keys" --> "Backward Input"
+"Check Arrow Keys" --> "Right Input"
+
+"Forward Input" --> "Calculate Velocity"
+"Left Input" --> "Calculate Velocity"
+"Right Input" --> "Calculate Velocity"
+"Backward Input" --> "Calculate Velocity"
+
+"Calculate Velocity" --> "Apply Movement"
+"Apply Movement" --> "Rigidbody.velocity"
+
+"Check Space (Jump)" --> "Check If Grounded"
+"Check If Grounded" --> "Apply Jump Force"
+"Apply Jump Force" --> "Update Velocity"
+
+"Raycast Down" --> "Update isGrounded"
+"Check Collision Below" --> "Update isGrounded"
+
+"Rigidbody.velocity" --> Physics
+"Gravity" --> Physics
+"Collision Detection" --> Physics
+
+@enduml

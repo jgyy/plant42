@@ -1,0 +1,71 @@
+@startuml scene_hierarchy
+
+package "FloorIsLavaScene" {
+    component "Hierarchy"
+
+    package "Main Camera" {
+        component "Camera Component"
+        component "Position: Above pathway"
+        component "View: Entire scene"
+    }
+
+    package "Floor" {
+        component "GameObject: Floor"
+        component "Mesh: Primitive Square"
+        component "Collider: Box Collider"
+        component "Material: Lava (Orange/Red)"
+    }
+
+    package "Pathway" {
+        component "Empty GameObject"
+        component "Parent Container"
+
+        package "Pathway Elements" {
+            component "Stairs"
+            component "Bridges"
+            component "Platforms"
+            component "Obstacles"
+        }
+
+        component "Child GameObjects"
+    }
+
+    package "Player" {
+        component "GameObject: Player"
+        component "Shape: Sphere"
+        component "Rigidbody: Dynamic"
+        component "Collider: Sphere Collider"
+        component "Material: Colorful"
+        component "Script: PlayerController"
+    }
+
+    package "Decorations" {
+        component "Tree"
+        component "Vegetation"
+        component "Environmental Objects"
+        component "With Colors/Materials"
+    }
+
+    package "Lights" {
+        component "Directional Light"
+        component "Optional: Point Lights"
+    }
+}
+
+Hierarchy --> "Main Camera"
+Hierarchy --> Floor
+Hierarchy --> Pathway
+Hierarchy --> Player
+Hierarchy --> Decorations
+Hierarchy --> Lights
+
+Pathway --> "Child GameObjects"
+"Child GameObjects" --> Stairs
+"Child GameObjects" --> Bridges
+"Child GameObjects" --> Platforms
+"Child GameObjects" --> Obstacles
+
+Player --> "Script: PlayerController"
+Floor --> "Material: Lava (Orange/Red)"
+
+@enduml

@@ -1,0 +1,70 @@
+@startuml game_loop
+
+start
+
+:Initialize Game;
+note right
+    Load FloorIsLavaScene
+    Place Player on Pathway
+    Setup Camera View
+    Initialize Rigidbody
+end note
+
+:Game Running;
+:Game Active = True;
+
+while (Game Active?)
+    :Update Input;
+    note right
+        Check WASD keys
+        Check Arrow keys
+        Check Space bar
+    end note
+
+    :Call OnUpdate() in PlayerController;
+    note right
+        Handle movement input
+        Apply velocity changes
+        Update position
+    end note
+
+    :Physics Simulation;
+    note right
+        Apply gravity
+        Handle collisions
+        Update rigidbody
+    end note
+
+    :Check Game State;
+    if (Player on Pathway?) then
+        :Continue Playing;
+    elseif (Player touched Floor?) then
+        :Game Over Triggered;
+        :Log Game Over;
+        :Destroy Player;
+        :Game Active = False;
+    else
+        if (Fell below map?) then
+            :Game Over Triggered;
+            :Log Game Over;
+            :Destroy Player;
+            :Game Active = False;
+        else
+            :Keep Playing;
+        endif
+    endif
+
+    :Render Frame;
+    note right
+        Draw scene
+        Update camera
+        Display graphics
+    end note
+
+endwhile
+
+:Clean Up;
+
+stop
+
+@enduml

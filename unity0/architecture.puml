@@ -1,0 +1,159 @@
+' plantuml *.puml
+@startuml architecture
+
+package "Unity Game Architecture - Module00" {
+    package "Core Systems" {
+        component "Input Manager"
+        note right of "Input Manager"
+            Handles WASD/Arrows
+            Handles Space for jump
+        end note
+
+        component "Physics Engine"
+        note right of "Physics Engine"
+            Gravity
+            Rigidbody simulation
+            Collision detection
+        end note
+
+        component "Renderer"
+        note right of "Renderer"
+            Draws GameObjects
+            Applies materials
+            Renders textures
+        end note
+    }
+
+    package "Game Objects" {
+        component "Player" as Player_GO
+        note right of Player_GO
+            Sphere mesh
+            Rigidbody
+            Collider
+            PlayerController script
+        end note
+
+        component "Pathway" as Pathway_GO
+        note right of Pathway_GO
+            Parent container
+            Multiple children
+            Box colliders
+        end note
+
+        component "Floor" as Floor_GO
+        note right of Floor_GO
+            Square primitive
+            Static rigidbody
+            Lava material
+        end note
+
+        component "Decorations" as Dec_GO
+        note right of Dec_GO
+            Trees
+            Plants
+            Environmental objects
+        end note
+
+        component "Camera" as Cam_GO
+        note right of Cam_GO
+            Main camera
+            Orthogonal or Perspective
+        end note
+    }
+
+    package "Scripts & Logic" {
+        component "PlayerController"
+        note right of PlayerController
+            Movement
+            Jumping
+            Input handling
+            Ground detection
+            Game-over logic
+        end note
+    }
+
+    package "Assets" {
+        component "Materials"
+        note right of Materials
+            Lava material
+            Stone material
+            Player color
+            Decorations
+        end note
+
+        component "Textures"
+        note right of Textures
+            From Asset Store
+            Lava texture
+            Stone texture
+        end note
+
+        component "Models"
+        note right of Models
+            Primitives
+            Imported assets
+        end note
+    }
+
+    package "Game Loop" {
+        component "Update()"
+        note right of "Update()"
+            Called every frame
+            Input processing
+            Logic updates
+        end note
+
+        component "Physics Update"
+        note right of "Physics Update"
+            Fixed timestep
+            Collision detection
+            Force application
+        end note
+
+        component "Render()"
+        note right of "Render()"
+            Draw to screen
+            Camera view
+        end note
+    }
+
+    package "Gameplay Flow" {
+        component "Game Start"
+        component "Player Movement"
+        component "Collision Check"
+        component "Game Over"
+        component "Game End"
+
+        "Game Start" --> "Player Movement"
+        "Player Movement" --> "Collision Check"
+        "Collision Check" --> "Game Over"
+        "Game Over" --> "Game End"
+    }
+}
+
+"Input Manager" --> PlayerController
+PlayerController --> Player_GO
+Player_GO --> "Physics Engine"
+"Physics Engine" --> "Renderer"
+
+"Physics Engine" --> Floor_GO
+"Physics Engine" --> Pathway_GO
+
+Materials --> Player_GO
+Materials --> Floor_GO
+Materials --> Pathway_GO
+
+Textures --> Materials
+Models --> Decorations
+
+Player_GO --> "Update()"
+Pathway_GO --> "Physics Update"
+Floor_GO --> "Physics Update"
+
+"Update()" --> "Physics Update"
+"Physics Update" --> "Render()"
+
+PlayerController --> "Collision Check"
+"Physics Engine" --> "Collision Check"
+
+@enduml

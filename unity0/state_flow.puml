@@ -1,0 +1,70 @@
+@startuml state_flow
+
+state Exercise00Setup {
+    [*] --> Create_Project
+    Create_Project --> Create_Scene
+    Create_Scene --> Setup_Floor
+    Setup_Floor --> Setup_Pathway
+    Setup_Pathway --> Place_Decorations
+    Place_Decorations --> Place_Player
+    Place_Player --> Position_Camera
+    Position_Camera --> Ex00_Complete
+}
+
+state Exercise01Gameplay {
+    [*] --> Create_Script
+    Create_Script --> Implement_Movement
+    Implement_Movement --> WASD_Support
+    WASD_Support --> Arrow_Support
+    Arrow_Support --> Implement_Jump
+    Implement_Jump --> Add_Obstacles
+    Add_Obstacles --> Ex01_Complete
+}
+
+state Exercise02Polish {
+    [*] --> Download_Assets
+    Download_Assets --> Apply_Textures
+    Apply_Textures --> Floor_Lava_Look
+    Floor_Lava_Look --> Pathway_Stone_Look
+    Pathway_Stone_Look --> Add_Vegetation
+    Add_Vegetation --> Final_Polish
+    Final_Polish --> Ex02_Complete
+}
+
+state Exercise03GameOver {
+    [*] --> Detect_Collision
+    Detect_Collision --> Check_Floor_Contact
+    Check_Floor_Contact --> Implement_GameOver
+    Implement_GameOver --> Add_Debug_Log
+    Add_Debug_Log --> Destroy_Player
+    Destroy_Player --> Test_Mechanics
+    Test_Mechanics --> Ex03_Complete
+}
+
+state GamePlaying {
+    [*] --> Waiting_Input
+    Waiting_Input --> Processing_Input
+    Processing_Input --> Movement
+    Movement --> Check_Collision
+    Check_Collision --> Falling
+    Check_Collision --> Safe
+    Check_Collision --> GameOver_State
+    Falling --> Check_Collision
+    Safe --> Check_Collision
+    GameOver_State --> Game_Over_Triggered
+}
+
+state GameOverState {
+    Game_Over_Triggered --> Log_Output
+    Log_Output --> Destroy_Player_Object
+    Destroy_Player_Object --> [*]
+}
+
+Ex00_Complete --> Ex01_Complete
+Ex01_Complete --> Ex02_Complete
+Ex02_Complete --> Ex03_Complete
+
+Ex03_Complete --> GamePlaying
+GamePlaying --> GameOverState
+
+@enduml

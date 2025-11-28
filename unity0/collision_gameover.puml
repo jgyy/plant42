@@ -1,0 +1,100 @@
+@startuml collision_gameover
+
+package "Collision Detection" {
+    component "Player Collider"
+    note right of "Player Collider"
+        Sphere Collider
+        On Player GameObject
+        Rigidbody: Dynamic
+    end note
+
+    component "Floor Collider"
+    note right of "Floor Collider"
+        Box Collider
+        On Floor GameObject
+        Rigidbody: Static
+    end note
+
+    component "Pathway Colliders"
+    note right of "Pathway Colliders"
+        Box Colliders on Pathway elements
+        Stairs, Bridges, Platforms
+        Rigidbody: Static
+    end note
+}
+
+package "Game Over Detection" {
+    component "OnCollisionEnter()"
+    note right of "OnCollisionEnter()"
+        Triggered when collision starts
+        Check collision tag/layer
+    end note
+
+    component "Check Collision Type"
+    component "Floor Hit"
+    component "Pathway Contact"
+    component "Fell Below Map"
+    component "Trigger Game Over"
+    component "Update isGrounded"
+
+    note right of "Floor Hit"
+        Tag: "Floor"
+        Layer: "Lava"
+    end note
+
+    note right of "Pathway Contact"
+        Tag: "Pathway"
+        Layer: "Safe"
+    end note
+
+    note right of "Fell Below Map"
+        Y position < threshold
+        Or invisible floor
+    end note
+
+    OnCollisionEnter --> Check_Collision_Type
+    Check_Collision_Type --> Floor_Hit
+    Check_Collision_Type --> Pathway_Contact
+    Check_Collision_Type --> Fell_Below_Map
+    Floor_Hit --> Trigger_Game_Over
+    Fell_Below_Map --> Trigger_Game_Over
+    Pathway_Contact --> Update_isGrounded
+}
+
+package "Game Over Actions" {
+    component "Debug.Log()"
+    note right of "Debug.Log()"
+        Output: "Game Over"
+        Console message
+    end note
+
+    component "Destroy Player"
+    note right of "Destroy Player"
+        Remove Player GameObject
+        Stop movement
+        End gameplay
+    end note
+
+    component "Disable Movement"
+    note right of "Disable Movement"
+        Stop accepting input
+        Freeze physics
+    end note
+
+    component "Optional: Pause Game"
+    note right of "Optional: Pause Game"
+        Time.timeScale = 0
+        Freeze all animations
+    end note
+}
+
+Player_Collider --> OnCollisionEnter
+Floor_Collider --> OnCollisionEnter
+Pathway_Colliders --> OnCollisionEnter
+
+Trigger_Game_Over --> Debug_Log
+Trigger_Game_Over --> Destroy_Player
+Trigger_Game_Over --> Disable_Movement
+Trigger_Game_Over --> Optional_Pause_Game
+
+@enduml

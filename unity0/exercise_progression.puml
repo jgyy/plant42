@@ -1,0 +1,68 @@
+@startuml exercise_progression
+
+package "Unity Piscine - Module00" {
+    package "Exercise 00: Floor Is Lava" {
+        component "Create 3D Project"
+        component "Rename Scene"
+        component "Create Floor GameObject"
+        component "Create Pathway GameObject"
+        component "Add Decorations"
+        component "Place Player (Ball)"
+        component "Position Camera"
+    }
+
+    package "Exercise 01: Path Of Exile" {
+        component "Create PlayerController.cs"
+        component "Attach Script to Player"
+        component "Implement Movement (WASD)"
+        component "Implement Movement (Arrow)"
+        component "Implement Jumping"
+        component "Add Obstacles"
+    }
+
+    package "Exercise 02: Beautiful World" {
+        component "Download Assets (Asset Store)"
+        component "Apply Lava Texture to Floor"
+        component "Apply Stone Texture to Pathway"
+        component "Add Vegetation"
+        component "Polish Materials"
+        component "Adjust Colors"
+    }
+
+    package "Exercise 03: Game-Over Logic" {
+        component "Detect Floor Collision"
+        component "Implement Game-Over Check"
+        component "Add Debug.Log Output"
+        component "Destroy Player GameObject"
+        component "Test Game-Over Mechanics"
+    }
+}
+
+"Create 3D Project" --> "Rename Scene"
+"Rename Scene" --> "Create Floor GameObject"
+"Create Floor GameObject" --> "Create Pathway GameObject"
+"Create Pathway GameObject" --> "Add Decorations"
+"Add Decorations" --> "Place Player (Ball)"
+"Place Player (Ball)" --> "Position Camera"
+
+"Position Camera" --> "Create PlayerController.cs"
+"Create PlayerController.cs" --> "Attach Script to Player"
+"Attach Script to Player" --> "Implement Movement (WASD)"
+"Implement Movement (WASD)" --> "Implement Movement (Arrow)"
+"Implement Movement (Arrow)" --> "Implement Jumping"
+"Implement Jumping" --> "Add Obstacles"
+
+"Add Obstacles" --> "Download Assets (Asset Store)"
+"Download Assets (Asset Store)" --> "Apply Lava Texture to Floor"
+"Apply Lava Texture to Floor" --> "Apply Stone Texture to Pathway"
+"Apply Stone Texture to Pathway" --> "Add Vegetation"
+"Add Vegetation" --> "Polish Materials"
+"Polish Materials" --> "Adjust Colors"
+
+"Adjust Colors" --> "Detect Floor Collision"
+"Detect Floor Collision" --> "Implement Game-Over Check"
+"Implement Game-Over Check" --> "Add Debug.Log Output"
+"Add Debug.Log Output" --> "Destroy Player GameObject"
+"Destroy Player GameObject" --> "Test Game-Over Mechanics"
+
+@enduml
