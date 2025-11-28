@@ -1,0 +1,253 @@
+@startuml project_structure
+
+package "unityModule01" {
+    package "Assets" {
+        package "Scenes" {
+            component "Stage1.unity"
+            note right of "Stage1.unity"
+                Intro cooperative level
+                Ground, Camera, 3 characters
+            end note
+
+            component "Stage2.unity"
+            note right of "Stage2.unity"
+                Physics layers puzzle
+                White and colored platforms
+            end note
+
+            component "Stage3.unity"
+            note right of "Stage3.unity"
+                Teleporters and elevators
+                Moving platforms
+            end note
+
+            component "Stage4.unity"
+            note right of "Stage4.unity"
+                Switches and doors
+                Dynamic platforms
+            end note
+
+            component "Stage5.unity"
+            note right of "Stage5.unity"
+                Turrets, traps, holes
+                Final challenge
+            end note
+        }
+
+        package "Scripts" {
+            component "PlayerController.cs"
+            note right of "PlayerController.cs"
+                Movement logic
+                Jump mechanics
+                Input handling
+                Character stats parameters
+                Ground detection
+            end note
+
+            component "CameraController.cs"
+            note right of "CameraController.cs"
+                Follow active character
+                Smooth movement
+                Viewport constraints
+            end note
+
+            component "GameManager.cs"
+            note right of "GameManager.cs"
+                Scene transitions
+                Character switching
+                Stage completion
+                Game over handling
+            end note
+
+            component "TurretController.cs"
+            note right of "TurretController.cs"
+                Firing logic (no coroutines)
+                Projectile spawning
+                Color-based targeting
+            end note
+
+            component "SwitchController.cs"
+            note right of "SwitchController.cs"
+                Switch activation
+                Color state tracking
+                Event signaling
+            end note
+
+            component "DoorController.cs"
+            note right of "DoorController.cs"
+                Door state management
+                Linked switch checks
+                Door animation
+            end note
+
+            component "TeleporterController.cs"
+            note right of "TeleporterController.cs"
+                Entry detection
+                Character teleportation
+                Exit positioning
+            end note
+
+            component "HazardController.cs"
+            note right of "HazardController.cs"
+                Trap triggering
+                Hole detection
+                Game over logic
+            end note
+        }
+
+        package "Materials" {
+            component "Claire_Material.mat"
+            note right of "Claire_Material.mat"
+                Blue color
+                Character visual
+            end note
+
+            component "John_Material.mat"
+            note right of "John_Material.mat"
+                Yellow color
+                Character visual
+            end note
+
+            component "Thomas_Material.mat"
+            note right of "Thomas_Material.mat"
+                Red color
+                Character visual
+            end note
+
+            component "Platform_Materials"
+            note right of "Platform_Materials"
+                White platform
+                Colored platforms
+                Hazard visuals
+            end note
+        }
+
+        package "Prefabs" {
+            component "Character_Prefab"
+            note right of "Character_Prefab"
+                Base character model
+                Rigidbody
+                Collider
+                PlayerController script
+            end note
+
+            component "Platform_Prefab"
+            note right of "Platform_Prefab"
+                Collider setup
+                Material assignment
+                Layer configuration
+            end note
+
+            component "Switch_Prefab"
+            note right of "Switch_Prefab"
+                Trigger collider
+                Visual model
+                Script attachment
+            end note
+
+            component "Door_Prefab"
+            note right of "Door_Prefab"
+                Collider (non-trigger)
+                Visual model
+                Animation setup
+            end note
+
+            component "Turret_Prefab"
+            note right of "Turret_Prefab"
+                Visual representation
+                Fire point
+                Controller script
+            end note
+        }
+
+        package "Textures" {
+            component "Platform_Textures"
+            note right of "Platform_Textures"
+                White platform texture
+                Blue platform texture
+                Yellow platform texture
+                Red platform texture
+            end note
+
+            component "Hazard_Textures"
+            note right of "Hazard_Textures"
+                Turret sprites
+                Trap graphics
+                Hole textures
+            end note
+        }
+    }
+
+    package "ProjectSettings" {
+        component "PhysicsSettings.asset"
+        note right of "PhysicsSettings.asset"
+            Gravity value
+            Default material
+        end note
+
+        component "TagManager.asset"
+        note right of "TagManager.asset"
+            Character tags
+            Hazard tags
+            Interactive tags
+        end note
+
+        component "LayerCollisionMatrix.asset"
+        note right of "LayerCollisionMatrix.asset"
+            Physics layer configuration
+            Collision rules
+        end note
+    }
+
+    package "Build Settings" {
+        component "Build.json"
+        note right of "Build.json"
+            Stage1 scene (0)
+            Stage2 scene (1)
+            Stage3 scene (2)
+            Stage4 scene (3)
+            Stage5 scene (4)
+        end note
+    }
+
+    package "Other" {
+        component ".gitignore"
+        note right of ".gitignore"
+            Auto-generated by Unity
+            Binary files excluded
+        end note
+
+        component "README.md"
+        note right of "README.md"
+            Project documentation
+            Instructions
+        end note
+    }
+}
+
+"Stage1.unity" --> "PlayerController.cs"
+"Stage1.unity" --> "CameraController.cs"
+"Stage2.unity" --> "PlayerController.cs"
+"Stage3.unity" --> "TeleporterController.cs"
+"Stage4.unity" --> "SwitchController.cs"
+"Stage4.unity" --> "DoorController.cs"
+"Stage5.unity" --> "TurretController.cs"
+"Stage5.unity" --> "HazardController.cs"
+
+"Character_Prefab" --> "PlayerController.cs"
+"Platform_Prefab" --> "Platform_Materials"
+"Switch_Prefab" --> "SwitchController.cs"
+"Door_Prefab" --> "DoorController.cs"
+"Turret_Prefab" --> "TurretController.cs"
+
+"Claire_Material.mat" --> "Character_Prefab"
+"John_Material.mat" --> "Character_Prefab"
+"Thomas_Material.mat" --> "Character_Prefab"
+
+"Build.json" --> "Stage1.unity"
+"Build.json" --> "Stage2.unity"
+"Build.json" --> "Stage3.unity"
+"Build.json" --> "Stage4.unity"
+"Build.json" --> "Stage5.unity"
+
+@enduml

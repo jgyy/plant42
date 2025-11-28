@@ -1,0 +1,122 @@
+@startuml scene_management
+
+package "Scene Management System" {
+    package "Stage Scenes" {
+        component "Stage1 Scene" as S1
+        note right of S1
+            Initial cooperative level
+            3 colored exits
+            All characters needed
+        end note
+
+        component "Stage2 Scene" as S2
+        note right of S2
+            Physics Layers puzzle
+            Color-coded platforms
+            White platforms
+        end note
+
+        component "Stage3 Scene" as S3
+        note right of S3
+            Teleporters and elevators
+            Moving platforms
+            Timing challenges
+        end note
+
+        component "Stage4 Scene" as S4
+        note right of S4
+            Button and door system
+            Color-coded switches
+            Platform color changing
+        end note
+
+        component "Stage5 Scene" as S5
+        note right of S5
+            Final difficulty spike
+            Turrets and hazards
+            Holes and traps
+        end note
+    }
+
+    package "Scene Transition Logic" {
+        component "Stage Completion Check" as SCC
+        note right of SCC
+            All characters at exits?
+            All requirements met?
+        end note
+
+        component "Load Next Scene" as LNS
+        note right of LNS
+            SceneManager.LoadScene()
+            Preserve character states
+        end note
+
+        component "Cycle Management" as CM
+        note right of CM
+            Stage5 -> Stage1
+            Loop continuously
+        end note
+
+        component "Reset Character States" as RCS
+        note right of RCS
+            Position reset
+            Velocity reset
+            Health reset
+        end note
+    }
+
+    package "Progression Flow" {
+        component "Start Game" as STG
+        note right of STG
+            Load Stage1
+            Initialize characters
+        end note
+
+        component "Play Stage" as PS
+        note right of PS
+            Character control enabled
+            Collision detection active
+        end note
+
+        component "Stage Complete" as SC
+        note right of SC
+            All conditions met
+            Progress to next
+        end note
+
+        component "Game Over" as GO
+        note right of GO
+            Character death
+            Reset stage
+        end note
+    }
+}
+
+package "Console Feedback" {
+    component "Stage Messages" as SM
+    note right of SM
+        Stage 1 Complete!
+        Loading Stage 2...
+    end note
+}
+
+S1 --> SCC
+S2 --> SCC
+S3 --> SCC
+S4 --> SCC
+S5 --> SCC
+
+SCC --> LNS
+LNS --> CM
+CM --> RCS
+
+STG --> PS
+PS --> SC
+SC --> LNS
+
+GO --> RCS
+RCS --> PS
+
+LNS --> SM
+
+@enduml

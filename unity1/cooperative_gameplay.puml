@@ -1,0 +1,179 @@
+@startuml cooperative_gameplay
+
+package "Cooperative Gameplay" {
+    package "Character State Management" {
+        component "Active Character" as AC
+        note right of AC
+            Currently being controlled
+            Input enabled
+            Camera follows
+        end note
+
+        component "Inactive Characters" as IC
+        note right of IC
+            Not controlled by player
+            Physics still active
+            Affected by gravity
+        end note
+
+        component "Character Selection" as CS
+        note right of CS
+            Alpha1: Activate Claire
+            Alpha2: Activate Thomas
+            Alpha3: Activate John
+        end note
+
+        component "Switching Mechanism" as SM
+        note right of SM
+            Disable active input
+            Enable new character input
+            Transition camera
+        end note
+    }
+
+    package "Level Requirements" {
+        component "Claire Required" as CR
+        note right of CR
+            Specific platforms
+            Her colored exit
+            Slow climbing sections
+        end note
+
+        component "John Required" as JR
+        note right of JR
+            High jump areas
+            Far horizontal gaps
+            His colored exit
+        end note
+
+        component "Thomas Required" as TR
+        note right of TR
+            Balanced challenges
+            His colored exit
+            Medium sections
+        end note
+
+        component "Cooperation Requirement" as COOP
+        note right of COOP
+            No solo paths
+            Characters as platforms
+            Synchronized positioning
+        end note
+    }
+
+    package "Character Interaction" {
+        component "Collision with Teammates" as CWT
+        note right of CWT
+            Character A lands on B
+            B acts as platform
+            Both physics enabled
+        end note
+
+        component "Stacking Mechanics" as SM2
+        note right of SM2
+            Multiple characters stacked
+            Lower ones support upper ones
+            Increased height
+        end note
+
+        component "Momentum Transfer" as MT
+        note right of MT
+            Jump off teammate
+            Additional height
+            Coordinated jumps
+        end note
+
+        component "Exit Alignment" as EA
+        note right of EA
+            Each character at their exit
+            Proximity check
+            Completion detection
+        end note
+    }
+
+    package "Camera Management" {
+        component "Active Character Camera" as ACC
+        note right of ACC
+            Follow active character
+            Update position smoothly
+            Maintain offset
+        end note
+
+        component "Camera Framing" as CF
+        note right of CF
+            Show all players when possible
+            Focus on active character
+            Adjust zoom/distance
+        end note
+
+        component "Camera Constraints" as CC
+        note right of CC
+            Level bounds
+            Height limits
+            Prevent clipping
+        end note
+    }
+
+    package "Gameplay Flow" {
+        component "Stage Load" as SL
+        note right of SL
+            Load cooperative stage
+            Place 3 characters
+            None initially active
+        end note
+
+        component "Player Controls Character" as PCC
+        note right of PCC
+            Select character
+            Move and jump
+            Switch when needed
+        end note
+
+        component "Coordinate Movement" as COORD
+        note right of COORD
+            Decide switching sequence
+            Position characters
+            Use teammates as platforms
+        end note
+
+        component "Reach Exits" as RE
+        note right of RE
+            All 3 at their zones
+            Within tolerance
+            Simultaneous or sequential
+        end note
+
+        component "Stage Complete" as SC
+        note right of SC
+            Console message
+            Load next stage
+            Continue progression
+        end note
+    }
+}
+
+AC --> CS
+IC --> CS
+CS --> SM
+
+CR --> COOP
+JR --> COOP
+TR --> COOP
+
+CWT --> SM2
+SM2 --> MT
+MT --> EA
+
+AC --> ACC
+ACC --> CF
+CF --> CC
+
+SL --> PCC
+PCC --> COORD
+COORD --> RE
+RE --> SC
+
+SM --> PCC
+EA --> SC
+
+@enduml

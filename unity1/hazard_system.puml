@@ -1,0 +1,172 @@
+@startuml hazard_system
+
+package "Hazard System" {
+    package "Turrets" {
+        component "Turret GameObject" as TGO
+        note right of TGO
+            Visual model
+            Firing direction
+            Color coding
+        end note
+
+        component "Turret Configuration" as TC
+        note right of TC
+            Firing interval
+            Target color
+            Bullet prefab
+            Fire rate
+        end note
+
+        component "Firing Mechanism" as FM
+        note right of FM
+            Timer-based (Update loop)
+            No coroutines
+            Simple countdown
+        end note
+
+        component "Projectile System" as PS
+        note right of PS
+            Instantiate bullet
+            Set velocity
+            Add physics
+        end note
+
+        component "Color Filtering" as CF
+        note right of CF
+            Bullets match turret color
+            Only hit same-color characters
+            Pass through others
+        end note
+    }
+
+    package "Traps" {
+        component "Trap Trigger" as TT
+        note right of TT
+            Collider: trigger
+            Tag: "Trap"
+            Positioned on/above ground
+        end note
+
+        component "Trap Activation" as TA
+        note right of TA
+            OnTriggerEnter detection
+            Check colliding character
+            Trigger consequence
+        end note
+
+        component "Trap Effects" as TE
+        note right of TE
+            Spike damage
+            Knockback force
+            Visual effect
+        end note
+
+        component "Character Elimination" as CE
+        note right of CE
+            Set character as dead
+            Disable controls
+            Trigger game over
+        end note
+    }
+
+    package "Holes" {
+        component "Hole Zone" as HZ
+        note right of HZ
+            Invisible trigger zone
+            Y position threshold
+            Large fallthrough area
+        end note
+
+        component "Fall Detection" as FD
+        note right of FD
+            OnTriggerEnter on hole
+            Verify character falling
+        end note
+
+        component "Camera Disconnect" as CD
+        note right of CD
+            Detach camera from character
+            Keep last position
+            Stop following
+        end note
+
+        component "Character Death" as CHD
+        note right of CHD
+            Mark as dead
+            Stop physics
+            Game over
+        end note
+    }
+
+    package "Collision System" {
+        component "Bullet Collision" as BC
+        note right of BC
+            Bullet fires from turret
+            OnTriggerEnter with character
+            Verify color match
+        end note
+
+        component "Hit Detection" as HD
+        note right of HD
+            Same color: deal damage
+            Different color: pass through
+            Destroy bullet on hit
+        end note
+
+        component "Damage Resolution" as DR
+        note right of DR
+            Reduce health
+            Check if dead
+            Trigger game over
+        end note
+    }
+
+    package "Game Over System" {
+        component "Game Over Trigger" as GOT
+        note right of GOT
+            Bullet hit (same color)
+            Trap triggered
+            Fell in hole
+        end note
+
+        component "Game Over State" as GOS
+        note right of GOS
+            Set flag: gameOver = true
+            Disable character input
+            Stop movement
+        end note
+
+        component "Reset Option" as RO
+        note right of RO
+            Press R or Backspace
+            Reload scene
+            Reset all characters
+        end note
+    }
+}
+
+TGO --> TC
+TC --> FM
+FM --> PS
+PS --> CF
+
+CF --> BC
+BC --> HD
+HD --> DR
+
+TT --> TA
+TA --> TE
+TE --> CE
+
+HZ --> FD
+FD --> CD
+CD --> CHD
+
+DR --> GOT
+CE --> GOT
+CHD --> GOT
+
+GOT --> GOS
+GOS --> RO
+
+@enduml

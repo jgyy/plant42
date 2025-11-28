@@ -1,0 +1,122 @@
+@startuml character_stats
+
+package "Character System" {
+    package "Claire - Blue Square" {
+        component "Visual Model"
+        note right of "Visual Model"
+            Blue square shape
+            Small size
+        end note
+
+        component "Speed Stat"
+        note right of "Speed Stat"
+            Movement Speed: SLOW
+            moveSpeed = 0.8x
+        end note
+
+        component "Jump Stat"
+        note right of "Jump Stat"
+            Jump Height: LOW
+            jumpForce = 0.8x
+        end note
+
+        component "Ability"
+        note right of "Ability"
+            Slow but steady
+            Good for precise jumps
+        end note
+
+        "Visual Model" --> "Speed Stat"
+        "Speed Stat" --> "Jump Stat"
+        "Jump Stat" --> "Ability"
+    }
+
+    package "Thomas - Red Cube" {
+        component "Visual Model2"
+        note right of "Visual Model2"
+            Red cube shape
+            Medium size
+        end note
+
+        component "Speed Stat2"
+        note right of "Speed Stat2"
+            Movement Speed: AVERAGE
+            moveSpeed = 1.0x
+        end note
+
+        component "Jump Stat2"
+        note right of "Jump Stat2"
+            Jump Height: AVERAGE
+            jumpForce = 1.0x
+        end note
+
+        component "Ability2"
+        note right of "Ability2"
+            Balanced stats
+            Utility character
+        end note
+
+        "Visual Model2" --> "Speed Stat2"
+        "Speed Stat2" --> "Jump Stat2"
+        "Jump Stat2" --> "Ability2"
+    }
+
+    package "John - Yellow Stick" {
+        component "Visual Model3"
+        note right of "Visual Model3"
+            Yellow stick shape
+            Tall/thin profile
+        end note
+
+        component "Speed Stat3"
+        note right of "Speed Stat3"
+            Movement Speed: FAST
+            moveSpeed = 1.2x
+        end note
+
+        component "Jump Stat3"
+        note right of "Jump Stat3"
+            Jump Height: HIGH
+            jumpForce = 1.2x
+        end note
+
+        component "Ability3"
+        note right of "Ability3"
+            Agile and athletic
+            Best at vertical movement
+        end note
+
+        "Visual Model3" --> "Speed Stat3"
+        "Speed Stat3" --> "Jump Stat3"
+        "Jump Stat3" --> "Ability3"
+    }
+}
+
+package "Shared PlayerController Script" {
+    component "Input Handling"
+    note right of "Input Handling"
+        Same script for all
+        Uses configurable parameters
+    end note
+
+    component "Parameter Configuration"
+    note right of "Parameter Configuration"
+        moveSpeed variable
+        jumpForce variable
+    end note
+
+    component "Movement Logic"
+    note right of "Movement Logic"
+        Apply parameters
+        Physics-based movement
+    end note
+
+    "Input Handling" --> "Parameter Configuration"
+    "Parameter Configuration" --> "Movement Logic"
+}
+
+"Claire - Blue Square" --> "Shared PlayerController Script"
+"Thomas - Red Cube" --> "Shared PlayerController Script"
+"John - Yellow Stick" --> "Shared PlayerController Script"
+
+@enduml

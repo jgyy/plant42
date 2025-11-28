@@ -1,0 +1,216 @@
+' plantuml *.puml
+@startuml architecture_overview
+
+package "Unity Game Architecture - Module01" {
+    package "Core Systems" {
+        component "Input Manager" as IM
+        note right of IM
+            WASD/Arrows: Movement
+            Space: Jump
+            Alpha1/2/3: Character switch
+            R/Backspace: Reset
+        end note
+
+        component "Physics Engine" as PE
+        note right of PE
+            Gravity simulation
+            Rigidbody dynamics
+            Collision detection
+            Layer-based filtering
+        end note
+
+        component "Camera System" as CS
+        note right of CS
+            Follow active character
+            Smooth movement
+            Constrained viewport
+        end note
+
+        component "Scene Manager" as SM
+        note right of SM
+            Load/unload stages
+            Track completion
+            Handle transitions
+        end note
+    }
+
+    package "Characters" {
+        component "PlayerController Script" as PCS
+        note right of PCS
+            Movement logic
+            Jump mechanics
+            Ground detection
+            Input processing
+        end note
+
+        component "Claire Character" as CC
+        note right of CC
+            Slow speed (0.8x)
+            Low jump (0.8x)
+            Blue square shape
+        end note
+
+        component "John Character" as JC
+        note right of JC
+            Fast speed (1.2x)
+            High jump (1.2x)
+            Yellow stick shape
+        end note
+
+        component "Thomas Character" as TC
+        note right of TC
+            Average speed (1.0x)
+            Average jump (1.0x)
+            Red cube shape
+        end note
+    }
+
+    package "Level Design" {
+        component "Platforms" as PLAT
+        note right of PLAT
+            White: universal
+            Colored: character-specific
+            Moving: timed/triggered
+        end note
+
+        component "Interactive Elements" as IE
+        note right of IE
+            Switches/buttons
+            Doors
+            Teleporters
+        end note
+
+        component "Hazards" as HAZ
+        note right of HAZ
+            Turrets: color-coded shots
+            Traps: instant death
+            Holes: fall zones
+        end note
+
+        component "Exit Zones" as EZ
+        note right of EZ
+            Color-matched to character
+            Completion detectors
+            Stage progress triggers
+        end note
+    }
+
+    package "Physics System" {
+        component "Layer Configuration" as LC
+        note right of LC
+            Default layer
+            Character layers
+            General (white) layer
+        end note
+
+        component "Collision Matrix" as CM
+        note right of CM
+            Character vs platforms
+            Character vs hazards
+            Character vs exits
+        end note
+
+        component "Rigidbody Components" as RC
+        note right of RC
+            Dynamic characters
+            Static platforms
+            Trigger colliders
+        end note
+    }
+
+    package "Game Loop" {
+        component "Update()" as UPD
+        note right of UPD
+            Input processing
+            Character state
+            Camera updates
+        end note
+
+        component "FixedUpdate()" as FU
+        note right of FU
+            Physics simulation
+            Force application
+            Collision handling
+        end note
+
+        component "Late Update" as LU
+        note right of LU
+            Camera positioning
+            Rendering setup
+        end note
+    }
+
+    package "Progression System" {
+        component "Stage Completion" as STGC
+        note right of STGC
+            Check exit zones
+            Verify all characters
+            Trigger next load
+        end note
+
+        component "Game Over Logic" as GOL
+        note right of GOL
+            Hazard detection
+            Character death
+            Reset trigger
+        end note
+
+        component "Scene Cycling" as SC
+        note right of SC
+            Stage1 -> Stage5
+            Circular progression
+            Reload option
+        end note
+    }
+
+    package "Data Structure" {
+        component "Character Data" as CHD
+        note right of CHD
+            Position
+            Velocity
+            isGrounded flag
+            Health
+        end note
+
+        component "Stage Data" as STD
+        note right of STD
+            Active stage index
+            Character positions
+            Exit completion status
+        end note
+    }
+}
+
+IM --> PCS
+PE --> RC
+CS --> UPD
+
+PCS --> CC
+PCS --> JC
+PCS --> TC
+
+LC --> CM
+CM --> RC
+
+CC --> FU
+JC --> FU
+TC --> FU
+
+PLAT --> CM
+IE --> CM
+HAZ --> CM
+EZ --> CM
+
+UPD --> FU
+FU --> LU
+
+CM --> STGC
+CM --> GOL
+
+STGC --> SC
+GOL --> SC
+
+CHD --> PCS
+STD --> SM
+
+@enduml

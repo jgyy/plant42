@@ -1,0 +1,127 @@
+@startuml physics_layers
+
+package "Physics Layer System" {
+    package "Layer Configuration" {
+        component "Layer Setup"
+        note right of "Layer Setup"
+            Create custom layers:
+            - Default
+            - Claire
+            - John
+            - Thomas
+            - General
+        end note
+
+        component "Rigidbody Settings"
+        note right of "Rigidbody Settings"
+            Configure per character:
+            - Body Type: Dynamic
+            - Gravity: enabled
+            - Collision Detection
+        end note
+
+        component "Collider Configuration"
+        note right of "Collider Configuration"
+            Per platform/character:
+            - Collider Type
+            - Is Trigger: false
+            - Material friction
+        end note
+    }
+
+    package "Platform Types" {
+        component "White Platforms"
+        note right of "White Platforms"
+            Accessible to ALL
+            Layer: General
+            Collision: All layers
+        end note
+
+        component "Claire Platforms"
+        note right of "Claire Platforms"
+            Accessible to Claire only
+            Blue color
+            Layer: Claire
+        end note
+
+        component "John Platforms"
+        note right of "John Platforms"
+            Accessible to John only
+            Yellow color
+            Layer: John
+        end note
+
+        component "Thomas Platforms"
+        note right of "Thomas Platforms"
+            Accessible to Thomas only
+            Red color
+            Layer: Thomas
+        end note
+    }
+
+    package "Collision Matrix Rules" {
+        component "Claire Collisions"
+        note right of "Claire Collisions"
+            Claire collides with:
+            - White platforms (General)
+            - Claire platforms (Claire)
+            Falls through others
+        end note
+
+        component "John Collisions"
+        note right of "John Collisions"
+            John collides with:
+            - White platforms (General)
+            - John platforms (John)
+            Falls through others
+        end note
+
+        component "Thomas Collisions"
+        note right of "Thomas Collisions"
+            Thomas collides with:
+            - White platforms (General)
+            - Thomas platforms (Thomas)
+            Falls through others
+        end note
+    }
+
+    package "Implementation" {
+        component "Rigidbody Layer Mask"
+        note right of "Rigidbody Layer Mask"
+            Set on character:
+            - Claire: General + Claire
+            - John: General + John
+            - Thomas: General + Thomas
+        end note
+
+        component "Platform Layer Assignment"
+        note right of "Platform Layer Assignment"
+            Assign layer to each
+            platform GameObject
+        end note
+
+        component "Collision Detection"
+        note right of "Collision Detection"
+            OnCollisionEnter()
+            OnCollisionStay()
+            OnCollisionExit()
+        end note
+    }
+}
+
+"Layer Setup" --> "Rigidbody Settings"
+"Rigidbody Settings" --> "Collider Configuration"
+
+"White Platforms" --> "Claire Collisions"
+"Claire Platforms" --> "Claire Collisions"
+"John Platforms" --> "John Collisions"
+"Thomas Platforms" --> "Thomas Collisions"
+
+"Claire Collisions" --> "Rigidbody Layer Mask"
+"John Collisions" --> "Rigidbody Layer Mask"
+"Thomas Collisions" --> "Rigidbody Layer Mask"
+
+"Rigidbody Layer Mask" --> "Platform Layer Assignment"
+"Platform Layer Assignment" --> "Collision Detection"
+
+@enduml

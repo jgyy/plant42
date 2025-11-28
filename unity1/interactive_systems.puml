@@ -1,0 +1,147 @@
+@startuml interactive_systems
+
+package "Interactive Systems" {
+    package "Switch Systems" {
+        component "Switch GameObject" as SGO
+        note right of SGO
+            Collider: trigger
+            Tag: "Switch"
+            Visual representation
+        end note
+
+        component "Color Coded Switches" as CCS
+        note right of CCS
+            Blue switch for Claire
+            Yellow switch for John
+            Red switch for Thomas
+            White universal switches
+        end note
+
+        component "Switch State" as SS
+        note right of SS
+            Activated: true/false
+            Color applied: color value
+            Last activator: character
+        end note
+
+        component "OnTriggerEnter Detection" as OTED
+        note right of OTED
+            Check colliding object
+            Verify character tag
+            Activate switch
+        end note
+    }
+
+    package "Door Systems" {
+        component "Door GameObject" as DGO
+        note right of DGO
+            Collider: non-trigger
+            Tag: "Door"
+            Visual model
+        end note
+
+        component "Door State" as DS
+        note right of DS
+            Open: true/false
+            Target switch color
+            Linked switches
+        end note
+
+        component "Door Logic" as DL
+        note right of DL
+            Check linked switches
+            Activate matching color
+            Open/close based on state
+        end note
+
+        component "Door Movement" as DM
+        note right of DM
+            Translate up (open)
+            Translate down (closed)
+            Smooth animation
+        end note
+    }
+
+    package "Platform Color Changing" {
+        component "Dynamic Platform" as DP
+        note right of DP
+            Start: white color
+            Can change color
+            Updates collision layer
+        end note
+
+        component "Color Change Trigger" as CCT
+        note right of CCT
+            Switch activation
+            Detect change request
+            Apply new color
+        end note
+
+        component "Material Update" as MU
+        note right of MU
+            Update renderer material
+            Change visual color
+            Sync with layer
+        end note
+
+        component "Layer Migration" as LM
+        note right of LM
+            Move to new layer
+            Update collision matrix
+            Affect character interaction
+        end note
+    }
+
+    package "Interaction Flow" {
+        component "Character Collision" as CC
+        note right of CC
+            Enter trigger zone
+            Collision detected
+        end note
+
+        component "Switch Activation" as SA
+        note right of SA
+            Set switch state
+            Apply color
+            Send event
+        end note
+
+        component "Door Response" as DR
+        note right of DR
+            Receive switch event
+            Check conditions
+            Open or close door
+        end note
+
+        component "Platform Update" as PU
+        note right of PU
+            Receive color event
+            Change visual color
+            Update physics layer
+        end note
+    }
+}
+
+SGO --> CCS
+CCS --> SS
+SS --> OTED
+
+OTED --> SA
+
+DGO --> DS
+DS --> DL
+DL --> DM
+
+DP --> CCT
+CCT --> MU
+MU --> LM
+
+SA --> DR
+SA --> PU
+
+DR --> DM
+PU --> LM
+
+CC --> SA
+
+@enduml

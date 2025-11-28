@@ -1,0 +1,98 @@
+@startuml exercise_progression
+
+state Ex00 {
+    [*] --> Create_Stage1
+    Create_Stage1 --> Create_Ground
+    Create_Ground --> Place_Camera
+    Place_Camera --> Create_3_Characters
+    Create_3_Characters --> Implement_PlayerController
+    Implement_PlayerController --> Character_Selection
+    Character_Selection --> Alpha_Key_Switching
+    Alpha_Key_Switching --> Camera_Following
+    Camera_Following --> Scene_Reset
+    Scene_Reset --> Ex00_Complete
+}
+
+state Ex00_Complete
+
+state Ex01 {
+    [*] --> Differentiate_Characters
+    Differentiate_Characters --> Claire_Stats
+    Claire_Stats --> John_Stats
+    John_Stats --> Thomas_Stats
+    Thomas_Stats --> Design_Cooperative_Level
+    Design_Cooperative_Level --> Ground_Detection
+    Ground_Detection --> Exit_Zones
+    Exit_Zones --> Stage_Completion
+    Stage_Completion --> Console_Message
+    Console_Message --> Ex01_Complete
+}
+
+state Ex01_Complete
+
+state Ex02 {
+    [*] --> Setup_Physics_Layers
+    Setup_Physics_Layers --> Create_Stage2
+    Create_Stage2 --> White_Platforms
+    White_Platforms --> Color_Coded_Platforms
+    Color_Coded_Platforms --> Layer_Collision_Rules
+    Layer_Collision_Rules --> Character_Platform_Filtering
+    Character_Platform_Filtering --> Stage_Linking
+    Stage_Linking --> Cycling_Stages
+    Cycling_Stages --> Ex02_Complete
+}
+
+state Ex02_Complete
+
+state Ex03 {
+    [*] --> Create_Stage3
+    Create_Stage3 --> Design_Pathways
+    Design_Pathways --> Implement_Teleporters
+    Implement_Teleporters --> Teleport_Entrance
+    Teleport_Entrance --> Teleport_Exit
+    Teleport_Exit --> Moving_Platforms
+    Moving_Platforms --> Elevator_Timing
+    Elevator_Timing --> Playability_Test
+    Playability_Test --> Ex03_Complete
+}
+
+state Ex03_Complete
+
+state Ex04 {
+    [*] --> Create_Stage4
+    Create_Stage4 --> Design_Switches
+    Design_Switches --> Color_Coded_Switches
+    Color_Coded_Switches --> Switch_Color_Adaptation
+    Switch_Color_Adaptation --> Door_Systems
+    Door_Systems --> Door_Opening_Logic
+    Door_Opening_Logic --> Platform_Color_Changing
+    Platform_Color_Changing --> Puzzle_Design
+    Puzzle_Design --> Ex04_Complete
+}
+
+state Ex04_Complete
+
+state Ex05 {
+    [*] --> Create_Stage5
+    Create_Stage5 --> Design_Difficulty
+    Design_Difficulty --> Implement_Turrets
+    Implement_Turrets --> Color_Coded_Shots
+    Color_Coded_Shots --> Add_Traps
+    Add_Traps --> Add_Holes
+    Add_Holes --> Camera_Hole_Logic
+    Camera_Hole_Logic --> Game_Over_System
+    Game_Over_System --> Ex05_Complete
+}
+
+state Ex05_Complete
+
+state Build_Complete
+
+Ex00_Complete --> Ex01_Complete
+Ex01_Complete --> Ex02_Complete
+Ex02_Complete --> Ex03_Complete
+Ex03_Complete --> Ex04_Complete
+Ex04_Complete --> Ex05_Complete
+Ex05_Complete --> Build_Complete
+
+@enduml
