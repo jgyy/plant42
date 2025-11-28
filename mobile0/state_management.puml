@@ -1,0 +1,48 @@
+@startuml state_management
+
+state EX00 {
+    [*] --> Display
+    Display : Show "A simple text"
+    Display : Show button
+    Display --> ButtonPressed : click
+    ButtonPressed : Log event
+    ButtonPressed --> Display
+}
+
+state EX01 {
+    [*] --> ShowInitial
+    ShowInitial : Display "A simple text"
+    ShowInitial --> ShowHello : click
+    ShowHello : Display "Hello World!"
+    ShowHello --> ShowInitial : click
+}
+
+state EX02 {
+    [*] --> CalcUI
+    CalcUI : AppBar: Calculator
+    CalcUI : Expression: 0
+    CalcUI : Result: 0
+    CalcUI --> ButtonPress : button click
+    ButtonPress : Log button
+    ButtonPress --> CalcUI
+}
+
+state EX03 {
+    [*] --> Ready
+    Ready : expression = "0"
+    Ready : result = "0"
+    Ready --> Input : number
+    Input : Append digit
+    Input --> Operator : operator
+    Operator : Add operator
+    Operator --> Input : number
+    Input --> Calculate : equals
+    Calculate : Evaluate
+    Calculate --> Ready : clear
+}
+
+EX00 --> EX01 : Complete
+EX01 --> EX02 : Complete
+EX02 --> EX03 : Complete
+
+@enduml

@@ -1,0 +1,76 @@
+@startuml testing_edge_cases
+
+package "Exercise 03: Testing & Edge Cases" {
+
+    package "Expression Parsing" {
+        component "Valid Expression"
+        component "Invalid Expression"
+        component "Parse Result"
+        
+        Valid_Expression --> Parse_Result: Valid
+        Invalid_Expression --> Parse_Result: Invalid
+    }
+
+    package "Calculation Tests" {
+        component "Basic Arithmetic"
+        component "Multiple Operations"
+        component "Decimal Numbers"
+        component "Negative Numbers"
+        component "Calculation Result"
+
+        Basic_Arithmetic --> Calculation_Result
+        Multiple_Operations --> Calculation_Result
+        Decimal_Numbers --> Calculation_Result
+        Negative_Numbers --> Calculation_Result
+    }
+
+    package "Error Handling" {
+        component "Division by Zero"
+        component "Invalid Syntax"
+        component "Overflow"
+        component "Empty Expression"
+        component "Error Handler"
+
+        Division_by_Zero --> Error_Handler
+        Invalid_Syntax --> Error_Handler
+        Overflow --> Error_Handler
+        Empty_Expression --> Error_Handler
+    }
+
+    package "User Input Validation" {
+        component "Decimal Point Check"
+        component "Operator Sequencing"
+        component "Negative Number Entry"
+        component "Input Validator"
+
+        Decimal_Point_Check --> Input_Validator
+        Operator_Sequencing --> Input_Validator
+        Negative_Number_Entry --> Input_Validator
+    }
+
+    package "Device Testing" {
+        component "Phone Portrait"
+        component "Phone Landscape"
+        component "Tablet Portrait"
+        component "Tablet Landscape"
+        component "Device Test Results"
+
+        Phone_Portrait --> Device_Test_Results
+        Phone_Landscape --> Device_Test_Results
+        Tablet_Portrait --> Device_Test_Results
+        Tablet_Landscape --> Device_Test_Results
+    }
+}
+
+package "Testing Checklist" {
+    component "All buttons functional"
+    component "Display updates correctly"
+    component "No crashes on errors"
+    component "Responsive on all devices"
+    component "Debug console logs shown"
+    component "Edge cases handled"
+    component "Large numbers work"
+    component "Decimal precision correct"
+}
+
+@enduml

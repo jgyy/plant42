@@ -1,0 +1,104 @@
+' plantuml *.puml -o
+@startuml architecture_overview
+
+package "Piscine Mobile - 0 Architecture" {
+
+    package "Exercise 00: Basic Display" as EX00_ARCH {
+        component "Stateless Widget" as EX00_Widget
+        note right of EX00_Widget
+            MyApp extends StatelessWidget
+            Simple display without state
+        end note
+    }
+
+    package "Exercise 01: Hello World" as EX01_ARCH {
+        component "Stateful Widget" as EX01_Widget
+        component "State Class" as EX01_State
+        component "Text Variable" as EX01_TextVar
+        note right of EX01_Widget
+            MyApp extends StatefulWidget
+            Handles state changes for toggle
+        end note
+
+        EX01_Widget --> EX01_State
+        EX01_State --> EX01_TextVar
+    }
+
+    package "Exercise 02: Calculator Layout" as EX02_ARCH {
+        component "Stateful Widget" as EX02_Widget
+        component "UI Components" as EX02_UI
+        component "AppBar"
+        component "TextFields (2)"
+        component "Button Grid"
+        component "Debug Logging"
+        note right of EX02_Widget
+            Layout only, no logic
+            Responsive design required
+        end note
+
+        EX02_Widget --> EX02_UI
+        EX02_UI --> AppBar
+        EX02_UI --> "TextFields (2)"
+        EX02_UI --> "Button Grid"
+        EX02_UI --> "Debug Logging"
+    }
+
+    package "Exercise 03: Working Calculator" as EX03_ARCH {
+        component "Stateful Widget" as EX03_Widget
+        component "State Management" as EX03_State_Mgmt
+        component "Expression Handler" as EX03_ExpHandler
+        component "Calculation Engine" as EX03_CalcEngine
+        component "math_expressions Lib" as EX03_MathLib
+        component "Error Handler" as EX03_ErrorHandler
+        component "UI Layer" as EX03_UI
+
+        note right of EX03_Widget
+            Full functional calculator
+            Input validation required
+            Error handling required
+        end note
+
+        EX03_Widget --> EX03_State_Mgmt
+        EX03_State_Mgmt --> EX03_ExpHandler
+        EX03_ExpHandler --> EX03_CalcEngine
+        EX03_CalcEngine --> EX03_MathLib
+        EX03_CalcEngine --> EX03_ErrorHandler
+        EX03_State_Mgmt --> EX03_UI
+    }
+
+    package "Key Concepts Progression" {
+        component "Concept 1: Widgets"
+        component "Concept 2: State"
+        component "Concept 3: Layout"
+        component "Concept 4: Logic"
+        component "Concept 5: Error Handling"
+
+        "Concept 1: Widgets" --> "Concept 2: State"
+        "Concept 2: State" --> "Concept 3: Layout"
+        "Concept 3: Layout" --> "Concept 4: Logic"
+        "Concept 4: Logic" --> "Concept 5: Error Handling"
+    }
+
+    package "Common Requirements Across Exercises" {
+        component "Responsive Design"
+        component "Debug Logging"
+        component "User Input Handling"
+        component "State Updates"
+        component "UI Rebuilds"
+    }
+}
+
+package "Flutter Framework Layer" {
+    component "Material Design"
+    component "Widget Tree"
+    component "State Management"
+    component "Event Handling"
+    component "Build System"
+}
+
+EX00_ARCH -.-> "Flutter Framework Layer"
+EX01_ARCH -.-> "Flutter Framework Layer"
+EX02_ARCH -.-> "Flutter Framework Layer"
+EX03_ARCH -.-> "Flutter Framework Layer"
+
+@enduml

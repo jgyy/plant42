@@ -1,0 +1,90 @@
+@startuml widget_structure
+
+package "Exercise 00: Basic Display" {
+    component "MyApp (MaterialApp)"
+    component "Home Screen" as EX00_Home
+    component "Scaffold"
+    component "Center"
+    component "Column"
+    component "Text Widget"
+    component "Button Widget"
+
+    MyApp --> EX00_Home
+    EX00_Home --> Scaffold
+    Scaffold --> Center
+    Center --> Column
+    Column --> "Text Widget"
+    Column --> "Button Widget"
+}
+
+package "Exercise 01: Hello World" {
+    component "MyApp (MaterialApp)" as EX01_App
+    component "Home Screen" as EX01_Home
+    component "Scaffold" as EX01_Scaffold
+    component "Center" as EX01_Center
+    component "Column" as EX01_Column
+    component "Text Widget (State)" as EX01_Text
+    component "Button Widget" as EX01_Button
+
+    EX01_App --> EX01_Home
+    EX01_Home --> EX01_Scaffold
+    EX01_Scaffold --> EX01_Center
+    EX01_Center --> EX01_Column
+    EX01_Column --> EX01_Text
+    EX01_Column --> EX01_Button
+}
+
+package "Exercise 02: Calculator Layout" {
+    component "MyApp (MaterialApp)" as EX02_App
+    component "Home Screen" as EX02_Home
+    component "Scaffold" as EX02_Scaffold
+    component "AppBar (Title)"
+    component "Body" as EX02_Body
+    component "Column" as EX02_Column
+    component "TextField (Expression)" as EX02_TF1
+    component "TextField (Result)" as EX02_TF2
+    component "Button Grid" as EX02_Grid
+    component "Number Buttons (0-9)"
+    component "Operator Buttons (+, -, *, /)"
+    component "Control Buttons (AC, C, =)"
+    component "Decimal Button (.)"
+
+    EX02_App --> EX02_Home
+    EX02_Home --> EX02_Scaffold
+    EX02_Scaffold --> "AppBar (Title)"
+    EX02_Scaffold --> EX02_Body
+    EX02_Body --> EX02_Column
+    EX02_Column --> EX02_TF1
+    EX02_Column --> EX02_TF2
+    EX02_Column --> EX02_Grid
+    EX02_Grid --> "Number Buttons (0-9)"
+    EX02_Grid --> "Operator Buttons (+, -, *, /)"
+    EX02_Grid --> "Control Buttons (AC, C, =)"
+    EX02_Grid --> "Decimal Button (.)"
+}
+
+package "Exercise 03: Working Calculator" {
+    component "MyApp (MaterialApp)" as EX03_App
+    component "Home Screen" as EX03_Home
+    component "Scaffold" as EX03_Scaffold
+    component "AppBar (Title)" as EX03_AppBar
+    component "Body" as EX03_Body
+    component "State Management" as EX03_State
+    component "Expression Input"
+    component "Result Display"
+    component "Calculator Logic" as EX03_Logic
+    component "Button Grid" as EX03_Grid
+
+    EX03_App --> EX03_Home
+    EX03_Home --> EX03_Scaffold
+    EX03_Scaffold --> EX03_AppBar
+    EX03_Scaffold --> EX03_Body
+    EX03_Body --> EX03_State
+    EX03_State --> "Expression Input"
+    EX03_State --> "Result Display"
+    EX03_State --> EX03_Logic
+    EX03_State --> EX03_Grid
+    EX03_Logic --> EX03_Grid
+}
+
+@enduml

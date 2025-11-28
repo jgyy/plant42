@@ -1,0 +1,93 @@
+@startuml ui_layout
+
+package "Exercise 00: Simple Layout" {
+    package "Phone Layout" {
+        component "Status Bar"
+        component "Text: A simple text"
+        component "Button: Click me"
+        note right
+            Centered both
+            horizontally and
+            vertically
+        end note
+    }
+
+    package "Tablet Layout" {
+        component "Status Bar" as TB1
+        component "Text: A simple text" as T2
+        component "Button: Click me" as B2
+        note right
+            Same layout,
+            scaled up for
+            larger screen
+        end note
+    }
+}
+
+package "Exercise 02: Calculator Layout" {
+    package "Phone Layout (Vertical)" {
+        component "AppBar: Calculator" as AP1
+        component "Expression Field" as EF1
+        component "Result Field" as RF1
+        component "4x4 Button Grid" as BG1
+        note right
+            Buttons arranged
+            in 4 columns
+            Numbers 0-9
+            Operators +,-,*,/
+            Control AC,C,=
+            Decimal .
+        end note
+    }
+
+    package "Tablet Layout (Horizontal)" {
+        component "AppBar: Calculator" as AP2
+        component "Expression Field" as EF2
+        component "Result Field" as RF2
+        component "4x5 Button Grid" as BG2
+        note right
+            Same grid layout
+            scaled for larger
+            screen with more
+            spacing
+        end note
+    }
+}
+
+package "Exercise 03: Functional Calculator" {
+    package "State Management" {
+        component "expressionText: String"
+        component "resultText: String"
+        component "isNewInput: bool"
+    }
+
+    package "Button Actions" {
+        component "onNumberPressed()"
+        component "onOperatorPressed()"
+        component "onDecimalPressed()"
+        component "onEqualsPressed()"
+        component "onClearPressed()"
+        component "onDeletePressed()"
+    }
+
+    package "Calculation" {
+        component "calculateResult()"
+        note right
+            Uses math_expressions
+            library to parse and
+            evaluate expressions
+        end note
+    }
+
+    "expressionText" --> "calculateResult()"
+    "resultText" -.-> "calculateResult()"
+    "onNumberPressed()" --> "expressionText"
+    "onOperatorPressed()" --> "expressionText"
+    "onDecimalPressed()" --> "expressionText"
+    "onEqualsPressed()" --> "calculateResult()"
+    "onClearPressed()" --> "expressionText"
+    "onClearPressed()" --> "resultText"
+    "onDeletePressed()" --> "expressionText"
+}
+
+@enduml

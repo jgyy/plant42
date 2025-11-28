@@ -1,0 +1,35 @@
+@startuml calculator_logic
+
+start
+:User presses a button;
+
+:Check button type;
+
+if (Number?) then
+    :Add digit to expression;
+elseif (Operator?) then
+    :Add operator to expression;
+elseif (Decimal?) then
+    :Add "." to expression;
+elseif (Delete?) then
+    :Remove last character;
+elseif (Clear?) then
+    :Clear expression and result;
+    :Set both to "0";
+elseif (Equals?) then
+    :Parse expression;
+    :Calculate result;
+    if (Valid?) then
+        :Display result;
+    else
+        :Show error;
+    endif
+else
+    :No action;
+endif
+
+:Update UI Display;
+
+stop
+
+@enduml

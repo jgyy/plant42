@@ -1,0 +1,89 @@
+@startuml button_layout
+
+package "Calculator Button Grid" {
+    package "Row 1" {
+        component "7"
+        component "8"
+        component "9"
+        component "/"
+    }
+
+    package "Row 2" {
+        component "4"
+        component "5"
+        component "6"
+        component "*"
+    }
+
+    package "Row 3" {
+        component "1"
+        component "2"
+        component "3"
+        component "-"
+    }
+
+    package "Row 4" {
+        component "0"
+        component "."
+        component "="
+        component "+"
+    }
+
+    package "Row 5" {
+        component "C"
+        component "AC"
+    }
+}
+
+package "Button Categories" {
+    package "Number Buttons (10)" {
+        component "0 to 9"
+        note right
+            Called on: Number button press
+            Action: Append digit to expression
+            Output: Updated expression display
+        end note
+    }
+
+    package "Operator Buttons (4)" {
+        component "+, -, *, /"
+        note right
+            Called on: Operator button press
+            Action: Append operator to expression
+            Output: Updated expression display
+        end note
+    }
+
+    package "Control Buttons (3)" {
+        component "C (Delete)"
+        component "AC (Clear All)"
+        component "= (Equals)"
+        note right
+            C: Remove last character
+            AC: Clear both fields
+            =: Calculate result
+        end note
+    }
+
+    package "Special Buttons (1)" {
+        component ". (Decimal)"
+        note right
+            Called on: Decimal button press
+            Action: Add decimal point
+            Output: Updated expression display
+        end note
+    }
+}
+
+package "Button Interactions" {
+    component "Button Click Event"
+    component "setState() Called"
+    component "UI Rebuild"
+    component "Display Updated"
+
+    "Button Click Event" --> "setState() Called"
+    "setState() Called" --> "UI Rebuild"
+    "UI Rebuild" --> "Display Updated"
+}
+
+@enduml

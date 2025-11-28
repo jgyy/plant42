@@ -1,0 +1,78 @@
+@startuml exercise_progression
+
+package "Piscine Mobile - 0" {
+    package "Exercise 00: Basic Display" {
+        component "Create Flutter Project"
+        component "Add Text Widget"
+        component "Add Button Widget"
+        component "Center Elements"
+        component "Add Debug Output"
+        component "Make Responsive"
+    }
+
+    package "Exercise 01: Hello World" {
+        component "Copy ex00 Code"
+        component "Add State Management"
+        component "Implement Toggle Logic"
+        component "Update Text on Click"
+        component "Test Toggle Behavior"
+    }
+
+    package "Exercise 02: Calculator Layout" {
+        component "Create ex02 Project"
+        component "Add AppBar (Title)"
+        component "Create TextFields"
+        component "Layout Number Buttons"
+        component "Add Operator Buttons"
+        component "Add Control Buttons"
+        component "Debug Output for Buttons"
+        component "Make Responsive"
+    }
+
+    package "Exercise 03: Working Calculator" {
+        component "Copy ex02 Code"
+        component "Add math_expressions Library"
+        component "Implement Number Input"
+        component "Implement Operators"
+        component "Handle Decimal Input"
+        component "Handle Negative Numbers"
+        component "Implement Expression Parsing"
+        component "Add Result Calculation"
+        component "Handle Edge Cases"
+        component "Error Handling"
+    }
+}
+
+"Create Flutter Project" --> "Add Text Widget"
+"Add Text Widget" --> "Add Button Widget"
+"Add Button Widget" --> "Center Elements"
+"Center Elements" --> "Add Debug Output"
+"Add Debug Output" --> "Make Responsive"
+
+"Make Responsive" --> "Copy ex00 Code"
+"Copy ex00 Code" --> "Add State Management"
+"Add State Management" --> "Implement Toggle Logic"
+"Implement Toggle Logic" --> "Update Text on Click"
+"Update Text on Click" --> "Test Toggle Behavior"
+
+"Test Toggle Behavior" --> "Create ex02 Project"
+"Create ex02 Project" --> "Add AppBar (Title)"
+"Add AppBar (Title)" --> "Create TextFields"
+"Create TextFields" --> "Layout Number Buttons"
+"Layout Number Buttons" --> "Add Operator Buttons"
+"Add Operator Buttons" --> "Add Control Buttons"
+"Add Control Buttons" --> "Debug Output for Buttons"
+"Debug Output for Buttons" --> "Make Responsive"
+
+"Make Responsive" --> "Copy ex02 Code"
+"Copy ex02 Code" --> "Add math_expressions Library"
+"Add math_expressions Library" --> "Implement Number Input"
+"Implement Number Input" --> "Implement Operators"
+"Implement Operators" --> "Handle Decimal Input"
+"Handle Decimal Input" --> "Handle Negative Numbers"
+"Handle Negative Numbers" --> "Implement Expression Parsing"
+"Implement Expression Parsing" --> "Add Result Calculation"
+"Add Result Calculation" --> "Handle Edge Cases"
+"Handle Edge Cases" --> "Error Handling"
+
+@enduml
